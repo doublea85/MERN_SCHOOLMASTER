@@ -1,5 +1,7 @@
 import UserModel from "../model/User.model.js";
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import ENV from '../config.js';
 
 
 
@@ -63,15 +65,16 @@ export async function login(req,res){
             .then(user => {
                 bcrypt.compare(password, user.password)
                     .then(passwordCheck => {
-
-                        if(!passwordCheck) return res.status(400).send({ error: "Don't have Password"});
+                        if(!passwordCheck)
+                            return res.status(400).send({ error: "Don't have Password"});
+                        
 
                         // create jwt token
                         const token = jwt.sign({
                                         userId: user._id,
                                         email : user.email
                                     }, ENV.JWT_SECRET , { expiresIn : "24h"});
-
+                                    
                         return res.status(200).send({
                             msg: "Login Successful...!",
                             email: user.email,
