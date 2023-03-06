@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export const UserSchema = new mongoose.Schema({
-    firstName: {
+      firstName: {
         type: String,
         required: true,
         min: 2,
@@ -37,8 +37,8 @@ export const UserSchema = new mongoose.Schema({
         type: String,
         enum: ['admin', 'teacher', 'student', 'parent'],
         default: 'student'
-      },
-})
+      }
+});
 
 
 export default mongoose.model.Users || mongoose.model('User', UserSchema);
