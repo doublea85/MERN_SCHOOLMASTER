@@ -18,6 +18,7 @@ export const UserSchema = new mongoose.Schema({
         required: [true, "Email is invalid or already taken"],
         max: 50,
         unique: [true, "Email is invalid or already taken"],
+        index: true,
       },
       password: {
         type: String,
@@ -25,7 +26,9 @@ export const UserSchema = new mongoose.Schema({
         min: 8,
       },
       mobile: {
-        type: Number
+        type: Number,
+        min: 10,
+        max: 14,
       },
       address : {
         type: String
@@ -40,5 +43,4 @@ export const UserSchema = new mongoose.Schema({
       }
 });
 
-
-export default mongoose.model.Users || mongoose.model('User', UserSchema);
+export default mongoose.models.Users || mongoose.model('User', UserSchema);

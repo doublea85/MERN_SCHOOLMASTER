@@ -49,12 +49,47 @@ export async function register(req, res) {
 
 /** POST: http://localhost:3001/api/login 
  * @param: {
-  "username" : "example123",
+  "email" : "example123",
   "password" : "admin123"
 }
 */
 export async function login(req,res){
-    res.json('Login route')
+   
+    const { email, password } = req.body;
+
+    try {
+        
+        UserModel.findOne({ email })
+            .then(user => {
+                bcrypt.compare(password, user.password)
+                    .then(passwordCheck => {
+
+                        if(!passwordCheck) return res.status(400).send({ error: "Don't have Password"});
+
+                        // create jwt token
+                        const token = jwt.sign({
+                                        userId: user._id,
+                                        email : user.email
+                                    }, ENV.JWT_SECRET , { expiresIn : "24h"});
+
+                        return res.status(200).send({
+                            msg: "Login Successful...!",
+                            email: user.email,
+                            token
+                        });                                    
+
+                    })
+                    .catch(error =>{
+                        return res.status(400).send({ error: "Password does not Match"})
+                    })
+            })
+            .catch( error => {
+                return res.status(404).send({ error : "Username not Found"});
+            })
+
+    } catch (error) {
+        return res.status(500).send({ error});
+    }
 }
 
 
