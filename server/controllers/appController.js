@@ -5,6 +5,22 @@ import ENV from '../config.js';
 
 
 
+/** Middleware for verify user */
+export async function verifyUser(req, res, next){
+    try {
+        const { email } = req.method == "GET" ? req.query : req.body;
+
+        //Check the user existance
+        let exist = await UserModel.findOne({ email });
+        if(!exist) return res.status(404).send({ error: "Cannot find User!" });
+
+        next();
+
+    } catch (error) {
+       return res.status(404).send({ error: "Authentication error" });
+    }
+}
+
 /** POST: http://localhost:3001/api/register 
  * @param : {
   "password" : "Adminadmin123",
@@ -74,7 +90,7 @@ export async function login(req,res){
                                         userId: user._id,
                                         email : user.email
                                     }, ENV.JWT_SECRET , { expiresIn : "24h"});
-                                    
+
                         return res.status(200).send({
                             msg: "Login Successful...!",
                             email: user.email,
@@ -97,9 +113,53 @@ export async function login(req,res){
 
 
 /** GET: http://localhost:3001/api/user/example123 */
-export async function getUser(req,res){
-    res.json('GetUser route')
+// export async function getUser(req,res){
+//     const { email } = req.params;
+
+//     try {
+//         if(!email) return res.status(501).send({ error: "Invalide email"});
+
+//         UserModel.findOne({ email }, function(err, user){
+//             if(err) return res.status(500).send({ err });
+//             if(!user) return res.status(501).send({ error: "Couldn't find the user"});
+
+//             return res.status(201).send(user);
+//         })
+        
+//     } catch (error) {
+//         return res.status(404).send({ error: "Cannot find user data" });
+//     }
+// }
+
+export async function getUser(req, res) {
+    const { email } = req.params;
+  
+    try {
+      if (!email) {
+        return res.status(400).send({ error: "Invalid email" });
+      }
+  
+      const user = await UserModel.findOne({ email }).exec();
+  
+      if (!user) {
+        return res.status(404).send({ error: "Couldn't find the user" });
+      }
+
+      /** Remove password from user */
+      /**
+       * Converting user in to a json format then assign it to a new object
+       * mongoose return unnecessary data with object so convert it into json
+        */
+      const { password, ...rest } = Object.assign({}, user.toJSON());
+  
+      return res.status(200).send(rest);
+
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send({ error: "Server error" });
+    }
 }
+  
 
 
 /** PUT: http://localhost:3001/api/updateuser 
