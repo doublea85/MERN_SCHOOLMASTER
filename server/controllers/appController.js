@@ -172,9 +172,23 @@ body: {
     profile : ''
 }
 */
-export async function updateUser(req,res){
-    res.json('UpdateUser route')
+export async function updateUser(req, res) {
+    try {
+        const id = req.query.id;
+        if (!id) {
+            return res.status(400).send({ error : "User ID not found...!" });
+        }
+
+        const body = req.body;
+        await UserModel.updateOne({ _id: id }, body);
+
+        return res.status(201).send({ msg: "Record updated...!"});
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ error: "Server error" });
+    }
 }
+
 
 
 /** GET: http://localhost:3001/api/generateOTP */
