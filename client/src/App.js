@@ -13,7 +13,7 @@ import PageNotFound from './components/PageNotFound';
 
 
 /** auth middleware */
-import { AuthorizeUser, ProtectRoute } from './middleware/auth'
+import { AuthorizeUser, ProtectRoute } from './middleware/auth';
 
 /** root routes */
 const router = createBrowserRouter([

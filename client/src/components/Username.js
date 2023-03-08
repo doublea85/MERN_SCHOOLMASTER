@@ -15,13 +15,13 @@ export default function Username() {
 
   const formik = useFormik({
     initialValues : {
-      username : 'example123'
+      email : 'example123'
     },
     validate : usernameValidate,
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit : async values => {
-      setUsername(values.username);
+      setUsername(values.email);
       navigate('/password')
     }
   })
@@ -35,10 +35,7 @@ export default function Username() {
         <div className={styles.glass}>
 
           <div className="title flex flex-col items-center">
-            <h4 className='text-5xl font-bold'>Hello Again!</h4>
-            <span className='py-4 text-xl w-2/3 text-center text-gray-500'>
-              Explore More by connecting with us.
-            </span>
+            <h4 className='text-3xl font-bold'>Hello Again!</h4>
           </div>
 
           <form className='py-1' onSubmit={formik.handleSubmit}>
