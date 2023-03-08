@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import avatar from '../assets/profile.png';
 import { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
-import { usernameValidate } from '../helper/validate'
+import { emailValidate } from '../helper/validate'
 import { useAuthStore } from '../store/store'
 
 import styles from '../styles/Username.module.css';
@@ -11,17 +11,17 @@ import styles from '../styles/Username.module.css';
 export default function Email() {
 
   const navigate = useNavigate();
-  const setUsername = useAuthStore(state => state.setUsername);
+  const setEmail = useAuthStore(state => state.setEmail);
 
   const formik = useFormik({
     initialValues : {
-      email : 'example123'
+      email : ''
     },
-    validate : usernameValidate,
+    validate : emailValidate,
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit : async values => {
-      setUsername(values.email);
+      setEmail(values.email);
       navigate('/password')
     }
   })
@@ -44,7 +44,7 @@ export default function Email() {
               </div>
 
               <div className="textbox flex flex-col items-center gap-6">
-                  <input {...formik.getFieldProps('username')} className={styles.textbox} type="text" placeholder='Username' />
+                  <input {...formik.getFieldProps('email')} className={styles.textbox} type="text" placeholder='Email' />
                   <button className={styles.btn} type='submit'>Let's Go</button>
               </div>
 
