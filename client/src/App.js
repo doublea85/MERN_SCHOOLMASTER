@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 
 /** import all components */
-import Username from './components/Username';
+import Email from './components/Email';
 import Password from './components/Password';
 import Register from './components/Register';
 import Profile from './components/Profile';
@@ -13,13 +13,13 @@ import PageNotFound from './components/PageNotFound';
 
 
 /** auth middleware */
-import { AuthorizeUser, ProtectRoute } from './middleware/auth'
+import { AuthorizeUser, ProtectRoute } from './middleware/auth';
 
 /** root routes */
 const router = createBrowserRouter([
     {
         path : '/',
-        element : <Username></Username>
+        element : <Email></Email>
     },
     {
         path : '/register',

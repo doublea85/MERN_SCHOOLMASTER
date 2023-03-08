@@ -17,9 +17,10 @@ export default function Register() {
 
   const formik = useFormik({
     initialValues : {
-      email: 'doyol56239@cnogs.com',
-      username: 'example123',
-      password : 'admin@123'
+      firstName: '',
+      lastName: '',
+      email: '',
+      password : ''
     },
     validate : registerValidation,
     validateOnBlur: false,
@@ -49,13 +50,10 @@ export default function Register() {
       <Toaster position='top-center' reverseOrder={false}></Toaster>
 
       <div className='flex justify-center items-center h-screen'>
-        <div className={styles.glass} style={{ width: "45%", paddingTop: '3em'}}>
+        <div className={styles.glass} style={{ width: "45%", paddingTop: '3em', height: "650px", padding: "10px 0"}}>
 
           <div className="title flex flex-col items-center">
-            <h4 className='text-5xl font-bold'>Register</h4>
-            <span className='py-4 text-xl w-2/3 text-center text-gray-500'>
-                Happy to join you!
-            </span>
+            <h4 className='text-3xl font-bold'>Register</h4>
           </div>
 
           <form className='py-1' onSubmit={formik.handleSubmit}>
@@ -68,8 +66,9 @@ export default function Register() {
               </div>
 
               <div className="textbox flex flex-col items-center gap-6">
+                  <input {...formik.getFieldProps('firstName')} className={styles.textbox} type="text" placeholder='firstName*' />
+                  <input {...formik.getFieldProps('lastName')} className={styles.textbox} type="text" placeholder='lastName*' />
                   <input {...formik.getFieldProps('email')} className={styles.textbox} type="text" placeholder='Email*' />
-                  <input {...formik.getFieldProps('username')} className={styles.textbox} type="text" placeholder='Username*' />
                   <input {...formik.getFieldProps('password')} className={styles.textbox} type="text" placeholder='Password*' />
                   <button className={styles.btn} type='submit'>Register</button>
               </div>
