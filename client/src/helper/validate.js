@@ -2,7 +2,7 @@ import toast from 'react-hot-toast'
 import { authenticate } from './helper'
 
 /** validate login page username */
-export async function emailValidate(values){
+export async function userValidate(values){
     const errors = emailVerify({}, values);
 
     if(values.email){

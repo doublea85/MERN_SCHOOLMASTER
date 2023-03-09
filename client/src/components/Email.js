@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import avatar from '../assets/profile.png';
 import { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
-import { emailValidate } from '../helper/validate'
+import { userValidate } from '../helper/validate'
 import { useAuthStore } from '../store/store'
 
 import styles from '../styles/Username.module.css';
@@ -17,7 +17,7 @@ export default function Email() {
     initialValues : {
       email : ''
     },
-    validate : emailValidate,
+    validate : userValidate,
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit : async values => {
@@ -32,7 +32,7 @@ export default function Email() {
       <Toaster position='top-center' reverseOrder={false}></Toaster>
 
       <div className='flex justify-center items-center h-screen'>
-        <div className={styles.glass}>
+        <div className={styles.glass} style={{ width: "40%"}}>
 
           <div className="title flex flex-col items-center">
             <h4 className='text-3xl font-bold'>Hello Again!</h4>

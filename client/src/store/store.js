@@ -6,4 +6,4 @@ export const useAuthStore = create((set) => ({
         active : false
     },
     setEmail : (name) => set((state) => ({ auth : { ...state.auth, email : name }})) 
-}))
+}));
