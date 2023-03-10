@@ -14,8 +14,8 @@ export const AuthorizeUser = ({ children }) => {
 
 
 export const ProtectRoute = ({ children }) => {
-    const username = useAuthStore.getState().auth.username;
-    if(!username){
+    const email = useAuthStore.getState().auth.email;
+    if(!email){
         return <Navigate to={'/'} replace={true}></Navigate>
     }
     return children;
