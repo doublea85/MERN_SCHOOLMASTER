@@ -48,7 +48,7 @@ export default function Password() {
       <Toaster position='top-center' reverseOrder={false}></Toaster>
 
       <div className='flex justify-center items-center h-screen'>
-        <div className={styles.glass}>
+        <div className={styles.glass} style={{width: "45%", height: "500px", padding: "15px 0"}}>
 
           <div className="title flex flex-col items-center">
             <h4 className='text-5xl font-bold'>Hello {apiData?.firstName}</h4>
