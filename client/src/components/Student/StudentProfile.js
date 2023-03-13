@@ -5,9 +5,11 @@ function StudentProfile({ studentId }) {
   const [student, setStudent] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/student/${studentId}`).then((response) => {
-      setStudent(response.data);
-    });
+    axios
+      .get(`http://localhost:3001/api/student/${studentId}`)
+      .then((response) => {
+        setStudent(response.data);
+      });
   }, [studentId]);
 
   return (
@@ -19,7 +21,11 @@ function StudentProfile({ studentId }) {
           </h2>
           <p className="text-gray-600 mb-4">{student.email}</p>
           <p className="text-gray-600 mb-4">{student.address}</p>
-          <img src={student.profile} alt={`${student.firstName} ${student.lastName}`} className="w-40 h-40 rounded-full mx-auto" />
+          <img
+            src={student.profile || "https://via.placeholder.com/150"}
+            alt={`${student.firstName} ${student.lastName}`}
+            className="w-40 h-40 rounded-full mx-auto"
+          />
         </>
       ) : (
         <p>Loading...</p>
@@ -29,8 +35,6 @@ function StudentProfile({ studentId }) {
 }
 
 export default StudentProfile;
-
-
 
 // import { useState, useEffect } from "react";
 // import axios from "axios";
@@ -43,10 +47,9 @@ export default StudentProfile;
 //       const response = await axios.get(`http://localhost:3001/api/student/${selectedStudentId}`);
 //       setStudent(response.data[0]);
 //     };
-  
+
 //     fetchStudent();
 //   }, [selectedStudentId]);
-  
 
 //   if (!student) {
 //     return <div>Loading...</div>
