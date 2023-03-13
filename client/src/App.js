@@ -48,10 +48,6 @@ const router = createBrowserRouter([
         element : <StudentsList></StudentsList>
     },
     {
-        path : '/studentProfile',
-        element : <StudentProfile></StudentProfile>
-    },
-    {
         path : '*',
         element : <PageNotFound></PageNotFound>
     },
