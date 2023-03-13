@@ -5,7 +5,6 @@ function StudentProfile({ studentId }) {
   const [student, setStudent] = useState(null);
 
   useEffect(() => {
-    const studentId = "640ef845954655682f133ebb";
     axios.get(`http://localhost:3001/api/student/${studentId}`).then((response) => {
       setStudent(response.data);
     });
