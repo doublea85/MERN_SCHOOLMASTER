@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import avatar from '../assets/profile.png';
+import { Link, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { userValidate } from '../helper/validate'
@@ -32,7 +31,7 @@ export default function Email() {
       <Toaster position='top-center' reverseOrder={false}></Toaster>
 
       <div className='flex justify-center items-center h-screen'>
-        <div className={styles.glass} style={{ width: "40%"}}>
+        <div className={styles.glass} style={{ width: "40%", height: "350px", paddingTop: "35px"}}>
 
           <div className="title flex flex-col items-center">
             <h4 className='text-3xl font-bold'>Hello Again!</h4>
@@ -40,7 +39,6 @@ export default function Email() {
 
           <form className='py-1' onSubmit={formik.handleSubmit}>
               <div className='profile flex justify-center py-4'>
-                  <img src={avatar} className={styles.profile_img} alt="avatar" />
               </div>
 
               <div className="textbox flex flex-col items-center gap-6">
