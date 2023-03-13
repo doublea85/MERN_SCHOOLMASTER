@@ -30,6 +30,8 @@ router.route('/resetPassword').put(controller.verifyUser, controller.resetPasswo
 /*****************************************************************************/
 /** POST Methods */
 router.route('/registerStudent').post(studentController.registerStudent); // register user
+router.route('/students').get(studentController.students);
+router.route('/student/:id').get(studentController.student);
 
 
 

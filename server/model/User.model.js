@@ -40,7 +40,24 @@ export const UserSchema = new mongoose.Schema({
         type: String,
         enum: ['admin', 'teacher', 'student', 'parent'],
         default: 'student'
+      },
+      activationKey: {
+        type: String,
+        default: ''
+      },
+      resetPasswordKey: {
+        type: String,
+        default: ''
+      },
+      resetPasswordExpires: {
+        type: Date,
+        default: null
+      },
+      active: {
+        type: Boolean,
+        default: false
       }
+      
 });
 
 export default mongoose.models.Users || mongoose.model('User', UserSchema);
