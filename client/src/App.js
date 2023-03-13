@@ -9,11 +9,13 @@ import Register from './components/Register';
 import Profile from './components/Profile';
 import Recovery from './components/Recovery';
 import Reset from './components/Reset';
+import StudentsList from './components/Student/StudentsList';
 import PageNotFound from './components/PageNotFound';
 
 
 /** auth middleware */
 import { AuthorizeUser, ProtectRoute } from './middleware/auth';
+import StudentProfile from './components/Student/StudentProfile';
 
 /** root routes */
 const router = createBrowserRouter([
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
     {
         path : '/reset',
         element : <Reset></Reset>
+    },
+    {
+        path : '/students',
+        element : <StudentsList></StudentsList>
+    },
+    {
+        path : '/studentProfile',
+        element : <StudentProfile></StudentProfile>
     },
     {
         path : '*',

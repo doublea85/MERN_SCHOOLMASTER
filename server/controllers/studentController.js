@@ -67,3 +67,73 @@ export async function registerStudent(req, res) {
   }
 }
 
+/**
+ * GET: http://localhost:3001/api/registerStudent 
+ */
+export const students = async (req, res) => {
+  try {
+    const students = await UserModel.find({ role: 'student' });
+    res.status(200).json(students);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
+/** -------- Specific student ---------- */
+export const student = async(req, res) => {
+  try {
+    const { id } = req.params;
+    const student = await UserModel.findOne({ _id : id });
+    res.status(200).json(student);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
+/** UPDATE STUDENT */
+// export const updateStudent = async(req, res) => {
+//   try {
+//   const { id } = req.params;
+//   const student = await UserModel.findOneAndUpdate({ _id: id, role: 'student' }, req.body, 
+//   { new: true })
+//       res.status(200).json(student);
+//   } catch (err) {
+//     res.status(400).json({ message: err.message });
+//   } 
+    
+// };
+
+export async function updateUser(req, res) {
+  try {
+      // const id = req.query.id;
+      const { userId } = rea.user;
+      if (!userId) {
+          return res.status(400).send({ error : "User ID not found...!" });
+      }
+
+      const body = req.body;
+      await UserModel.updateOne({ _id: userId }, body);
+
+      return res.status(201).send({ msg: "Record updated...!"});
+  } catch (error) {
+      console.error(error);
+      return res.status(500).send({ error: "Server error" });
+  }
+}
+
+
+/** DELETE STUDENT */
+export const deleteStudent = async (req, res) => {
+try {
+  const { id } = req.params;
+  const student = await UserModel.findOneAndDelete(id)
+    if (!student) {
+      res.status(404).json({ message: "Student not found" });
+      return;
+    }
+    res.status(200).json(student);
+} catch (err) {
+  res.status(500).json({ message: err.message });
+}
+};
+

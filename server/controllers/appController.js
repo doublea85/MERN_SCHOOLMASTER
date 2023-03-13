@@ -191,6 +191,31 @@ export async function updateUser(req, res) {
     }
 }
 
+/**
+ * POST: http://localhost:3001/api/deleteUser 
+ */
+export async function deleteUser(req, res) {
+    try {
+      const { userId } = req.user;
+  
+      if (!userId) {
+        return res.status(400).send({ error: 'User ID not found...!' });
+      }
+  
+      const deletedUser = await UserModel.findByIdAndDelete(userId).exec();
+  
+      if (!deletedUser) {
+        return res.status(404).send({ error: 'User not found' });
+      }
+  
+      return res.status(200).send({ msg: 'User deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send({ error: 'Server error' });
+    }
+  }
+  
+
 
 
 /** GET: http://localhost:3001/api/generateOTP */
