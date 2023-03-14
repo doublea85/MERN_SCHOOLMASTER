@@ -4,6 +4,8 @@ const router = Router();
 /** import all controllers */
 import * as controller from "../controllers/appController.js";
 import * as studentController from "../controllers/studentController.js";
+import * as parentController from "../controllers/parentController.js";
+import * as teacherController from "../controllers/teacherController.js"
 import { registerMail } from "../controllers/mailer.js";
 import Auth, { localVariables } from "../middleware/auth.js";
 
@@ -37,7 +39,7 @@ router.route("/registerStudent").post(studentController.registerStudent); // reg
 router.route("/students").get(studentController.students);
 router.route("/student/:id").get(studentController.student);
 router.route("/updatestudent/:id").put(studentController.updateStudent);
-router.route("/deletestudent/:id").delete(studentController.deleteStudent);
+// router.route("/deletestudent/:id").delete(studentController.deleteStudent);
 
 
 /*****************************************************************************/
@@ -48,7 +50,7 @@ router.route("/registerParent").post(parentController.registerParent); // regist
 router.route("/parents").get(parentController.parents);
 router.route("/parent/:id").get(parentController.parent);
 router.route("/updateparent/:id").put(parentController.updateParent);
-router.route("/deleteparent/:id").delete(parentController.deleteParent);
+// router.route("/deleteparent/:id").delete(parentController.deleteParent);
 
 
 /*****************************************************************************/
@@ -59,6 +61,6 @@ router.route("/registerTeacher").post(teacherController.registerTeacher); // reg
 router.route("/teachers").get(teacherController.teachers);
 router.route("/teacher/:id").get(teacherController.teacher);
 router.route("/updateteacher/:id").put(teacherController.updateTeacher);
-router.route("/deleteteacher/:id").delete(teacherController.deleteTeacher);
+// router.route("/deleteteacher/:id").delete(teacherController.deleteTeacher);
 
 export default router;
