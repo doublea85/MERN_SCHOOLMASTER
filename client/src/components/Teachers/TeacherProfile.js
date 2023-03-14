@@ -4,47 +4,47 @@ import axios from "axios";
 import avatar from "../../assets/profile.png";
 import { FiEdit } from "react-icons/fi";
 
-function StudentProfile({ studentId }) {
-  const [student, setStudent] = useState(null);
+function TeacherProfile({ teacherId }) {
+  const [teacher, setTeacher] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/student/${studentId}`)
+      .get(`http://localhost:3001/api/teacher/${teacherId}`)
       .then((response) => {
-        setStudent(response.data);
+        setTeacher(response.data);
       });
-  }, [studentId]);
+  }, [teacherId]);
 
   const handleEdit = () => {
-    navigate(`/students/${studentId}/edit`);
+    navigate(`/teacher/${teacherId}/edit`);
   };
 
   return (
     <div className="flex flex-col">
-      {student ? (
+      {teacher ? (
         <>
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold">
-              {student.firstName} {student.lastName}
+              {teacher.firstName} {teacher.lastName}
             </h3>
           </div>
           <hr className="border-gray-300 mt-2 mb-4"/>
           <div className="flex gap-20">
             <div>
               <img
-                src={student.profile || avatar}
-                alt={`${student.firstName} ${student.lastName}`}
+                src={teacher.profile || avatar}
+                alt={`${teacher.firstName} ${teacher.lastName}`}
                 className="w-20 border-slate-500"
               />
             </div>
             <div className="ml-4">
               <ul>
                 <li className="flex  gap-20 text-left">
-                  <strong>Email:</strong> {student.email}
+                  <strong>Email:</strong> {teacher.email}
                 </li>
                 <li className="flex  gap-20 text-left">
-                  <strong>Address:</strong> {student.address} 24 rue raspail 96290 Nullpart
+                  <strong>Address:</strong> {teacher.address} 24 rue raspail 96290 Nullpart
                 </li>
               </ul>
             </div>
@@ -62,6 +62,6 @@ function StudentProfile({ studentId }) {
   );
 }
 
-export default StudentProfile;
+export default TeacherProfile;
 
 
