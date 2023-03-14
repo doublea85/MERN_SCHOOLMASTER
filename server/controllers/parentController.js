@@ -18,7 +18,7 @@ import nodemailer from 'nodemailer';
 }
 */
 
-export async function registerStudent(req, res) {
+export async function registerParent(req, res) {
   const { firstName, lastName, email, profile } = req.body;
 
   try {
@@ -39,6 +39,7 @@ export async function registerStudent(req, res) {
           email,
           password: hashedPassword,
           profile: profile || '',
+          role: 'parent'
       });
       // save user
       const savedUser = await user.save();
@@ -68,23 +69,23 @@ export async function registerStudent(req, res) {
 }
 
 /**
- * GET: http://localhost:3001/api/registerStudent 
+ * GET: http://localhost:3001/api/parents 
  */
-export const students = async (req, res) => {
+export const parents = async (req, res) => {
   try {
-    const students = await UserModel.find({ role: 'student' });
-    res.status(200).json(students);
+    const parents = await UserModel.find({ role: 'parent' });
+    res.status(200).json(parents);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
 };
 
-/** -------- Specific student ---------- */
-export const student = async(req, res) => {
+/** -------- Specific parent ---------- */
+export const parent = async(req, res) => {
   try {
     const { id } = req.params;
-    const student = await UserModel.findOne({ _id : id });
-    res.status(200).json(student);
+    const parent = await UserModel.findOne({ _id : id });
+    res.status(200).json(parent);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -103,7 +104,7 @@ export const student = async(req, res) => {
     
 // };
 
-export async function updateStudent(req, res) {
+export async function updateParent(req, res) {
   try {
       const { userId } = req.params;
       if (!userId) {
@@ -123,16 +124,16 @@ export async function updateStudent(req, res) {
 
 
 
-/** DELETE STUDENT */
-export const deleteStudent = async (req, res) => {
+/** DELETE PARENT */
+export const deleteParent = async (req, res) => {
   try {
     const { id } = req.params;
-    const student = await UserModel.findOneAndDelete(id)
-      if (!student) {
-        res.status(404).json({ message: "Student not found" });
+    const parent = await UserModel.findOneAndDelete(id)
+      if (!parent) {
+        res.status(404).json({ message: "Parent not found" });
         return;
       }
-      res.status(200).json(student);
+      res.status(200).json(parent);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

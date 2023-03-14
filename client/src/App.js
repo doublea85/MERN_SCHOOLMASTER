@@ -10,12 +10,15 @@ import Profile from './components/Profile';
 import Recovery from './components/Recovery';
 import Reset from './components/Reset';
 import StudentsList from './components/Student/StudentsList';
+import StudentsEdit from './components/Student/StudentsEdit';
+import ParentsList from './components/Parents/ParentsList';
+import ParentEidt from './components/Parents/ParentEdit';
+import TeacherEdit from './components/Teachers/TeachersEdit';
+import TeachersList from './components/Teachers/TeachersList';
 import PageNotFound from './components/PageNotFound';
-
 
 /** auth middleware */
 import { AuthorizeUser, ProtectRoute } from './middleware/auth';
-import StudentProfile from './components/Student/StudentProfile';
 
 /** root routes */
 const router = createBrowserRouter([
@@ -48,10 +51,30 @@ const router = createBrowserRouter([
         element : <StudentsList></StudentsList>
     },
     {
+        path : '/students/:id/edit',
+        element : <StudentsEdit></StudentsEdit>
+    },
+    {
+        path : '/parents',
+        element : <ParentsList></ParentsList>
+    },
+    {
+        path : '/parent/:id/edit',
+        element : <ParentEidt></ParentEidt>
+    },
+    {
+        path : '/teachers',
+        element : <TeachersList></TeachersList>
+    },
+    {
+        path : '/teacher/:id/edit',
+        element : <TeacherEdit></TeacherEdit>
+    },
+    {
         path : '*',
         element : <PageNotFound></PageNotFound>
     },
-])
+]);
 
 export default function App() {
   return (
